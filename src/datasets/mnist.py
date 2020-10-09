@@ -16,7 +16,6 @@ class MNIST_Dataset(TorchvisionDataset):
         self.normal_classes = tuple([normal_class])
         self.outlier_classes = list(range(0, 10))
         self.outlier_classes.remove(normal_class)
-
         # Pre-computed min and max values (after applying GCN) from train data per class
         min_max = [(-0.8826567065619495, 9.001545489292527),
                    (-0.6661464580883915, 20.108062262467364),

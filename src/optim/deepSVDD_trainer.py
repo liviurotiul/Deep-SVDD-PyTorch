@@ -10,6 +10,10 @@ import torch
 import torch.optim as optim
 import numpy as np
 
+from sklearn import metrics
+from sklearn.metrics import roc_curve
+from sklearn.metrics import auc
+import matplotlib.pyplot as plt
 
 class DeepSVDDTrainer(BaseTrainer):
 
@@ -28,7 +32,7 @@ class DeepSVDDTrainer(BaseTrainer):
         self.nu = nu
 
         # Optimization parameters
-        self.warm_up_n_epochs = 10  # number of training epochs for soft-boundary Deep SVDD before radius R gets updated
+        self.warm_up_n_epochs = 3  # number of training epochs for soft-boundary Deep SVDD before radius R gets updated
 
         # Results
         self.train_time = None
@@ -41,10 +45,11 @@ class DeepSVDDTrainer(BaseTrainer):
 
         # Set device for network
         net = net.to(self.device)
-
+        
         # Get train data loader
         train_loader, _ = dataset.loaders(batch_size=self.batch_size, num_workers=self.n_jobs_dataloader)
 
+        print(train_loader)
         # Set optimizer (Adam optimizer for now)
         optimizer = optim.Adam(net.parameters(), lr=self.lr, weight_decay=self.weight_decay,
                                amsgrad=self.optimizer_name == 'amsgrad')
@@ -63,7 +68,8 @@ class DeepSVDDTrainer(BaseTrainer):
         start_time = time.time()
         net.train()
         for epoch in range(self.n_epochs):
-
+            # print(self.R)
+            # print(self.c)
             scheduler.step()
             if epoch in self.lr_milestones:
                 logger.info('  LR scheduler: new learning rate is %g' % float(scheduler.get_lr()[0]))
@@ -80,6 +86,7 @@ class DeepSVDDTrainer(BaseTrainer):
 
                 # Update network parameters via backpropagation: forward + backward + optimize
                 outputs = net(inputs)
+                # print(outputs[0], inputs[0] )
                 dist = torch.sum((outputs - self.c) ** 2, dim=1)
                 if self.objective == 'soft-boundary':
                     scores = dist - self.R ** 2
@@ -95,7 +102,7 @@ class DeepSVDDTrainer(BaseTrainer):
 
                 loss_epoch += loss.item()
                 n_batches += 1
-
+            print(self.R)
             # log epoch statistics
             epoch_train_time = time.time() - epoch_start_time
             logger.info('  Epoch {}/{}\t Time: {:.3f}\t Loss: {:.8f}'
@@ -149,7 +156,48 @@ class DeepSVDDTrainer(BaseTrainer):
         scores = np.array(scores)
 
         self.test_auc = roc_auc_score(labels, scores)
+
+        # confusion matrix
+        true_positive = 0
+        true_negative = 0
+        false_positive = 0
+        false_negative = 0
+        number_of_anomalies = int(sum(labels))
+        scores_indices = (-scores).argsort()[:number_of_anomalies]
+        actual_indices = (-labels).argsort()[:number_of_anomalies]
+        # print(scores_indices)
+        # print(actual_indices)
+        print("most anomalous samples that are actually anomalies: ", len(list(set(scores_indices) & set(actual_indices))))
+        for i in range(len(labels)):
+            if labels[i] == 1 and scores[i] >= 1:
+                true_positive += 1
+            if labels[i] == 0 and scores[i] < 1:
+                true_negative += 1
+            if labels[i] == 1 and scores[i] < 1:
+                false_negative += 1
+            if labels[i] == 0 and scores[i] > 1:
+                false_positive += 1
+        print("true_positive: ", true_positive)
+        print("true_negative: ", true_negative)
+        print("false_positive: ", false_positive)
+        print("false_negative: ", false_negative)
+        print("accuracy: ", ((true_positive+true_negative)/len(labels)) )
+        print('Test set AUC: {:.2f}%'.format(100. * self.test_auc))
         logger.info('Test set AUC: {:.2f}%'.format(100. * self.test_auc))
+
+
+        fpr, tpr, threshold = roc_curve(labels, scores)
+        roc_auc = auc(fpr, tpr)
+        plt.title('Receiver Operating Characteristic')
+        plt.plot(fpr, tpr, 'b', label = 'AUC = %0.2f' % roc_auc)
+        plt.legend(loc = 'lower right')
+        plt.plot([0, 1], [0, 1],'r--')
+        plt.xlim([0, 1])
+        plt.ylim([0, 1])
+        plt.ylabel('True Positive Rate')
+        plt.xlabel('False Positive Rate')
+        plt.show()
+
 
         logger.info('Finished testing.')
 

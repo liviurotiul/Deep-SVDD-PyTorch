@@ -14,8 +14,8 @@ from datasets.main import load_dataset
 # Settings
 ################################################################################
 @click.command()
-@click.argument('dataset_name', type=click.Choice(['mnist', 'cifar10']))
-@click.argument('net_name', type=click.Choice(['mnist_LeNet', 'cifar10_LeNet', 'cifar10_LeNet_ELU']))
+@click.argument('dataset_name', type=click.Choice(['mnist', 'cifar10', 'creditFraud', 'IEEE_creditFraud']))
+@click.argument('net_name', type=click.Choice(['mnist_LeNet', 'cifar10_LeNet', 'cifar10_LeNet_ELU', 'credit_fraud_net']))
 @click.argument('xp_path', type=click.Path(exists=True))
 @click.argument('data_path', type=click.Path(exists=True))
 @click.option('--load_config', type=click.Path(exists=True), default=None,
@@ -35,7 +35,7 @@ from datasets.main import load_dataset
 @click.option('--lr_milestone', type=int, default=0, multiple=True,
               help='Lr scheduler milestones at which lr is multiplied by 0.1. Can be multiple and must be increasing.')
 @click.option('--batch_size', type=int, default=128, help='Batch size for mini-batch training.')
-@click.option('--weight_decay', type=float, default=1e-6,
+@click.option('--weight_decay', type=float, default=1e-7,
               help='Weight decay (L2 penalty) hyperparameter for Deep SVDD objective.')
 @click.option('--pretrain', type=bool, default=True,
               help='Pretrain neural network parameters via autoencoder.')
@@ -64,7 +64,9 @@ def main(dataset_name, net_name, xp_path, data_path, load_config, load_model, ob
     :arg XP_PATH: Export path for logging the experiment.
     :arg DATA_PATH: Root path of data.
     """
-
+    print("batch size: ", batch_size)
+    print("epochs: ", n_epochs)
+    print("learning rate:", lr)
     # Get configuration
     cfg = Config(locals().copy())
 
@@ -184,9 +186,10 @@ def main(dataset_name, net_name, xp_path, data_path, load_config, load_model, ob
 
     # Save results, model, and configuration
     deep_SVDD.save_results(export_json=xp_path + '/results.json')
-    deep_SVDD.save_model(export_model=xp_path + '/model.tar')
-    cfg.save_config(export_json=xp_path + '/config.json')
+    # deep_SVDD.save_model(export_model=xp_path + '/model.tar')
+    # cfg.save_config(export_json=xp_path + '/config.json')
 
 
 if __name__ == '__main__':
     main()
+    print("_________________________________________")

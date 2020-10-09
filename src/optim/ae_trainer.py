@@ -55,7 +55,7 @@ class AETrainer(BaseTrainer):
 
                 # Update network parameters via backpropagation: forward + backward + optimize
                 outputs = ae_net(inputs)
-                scores = torch.sum((outputs - inputs) ** 2, dim=tuple(range(1, outputs.dim())))
+                scores = torch.sum((outputs.float() - inputs.float()) ** 2, dim=tuple(range(1, outputs.dim())))
                 loss = torch.mean(scores)
                 loss.backward()
                 optimizer.step()
@@ -95,7 +95,7 @@ class AETrainer(BaseTrainer):
                 inputs, labels, idx = data
                 inputs = inputs.to(self.device)
                 outputs = ae_net(inputs)
-                scores = torch.sum((outputs - inputs) ** 2, dim=tuple(range(1, outputs.dim())))
+                scores = torch.sum((outputs.float() - inputs.float()) ** 2, dim=tuple(range(1, outputs.dim())))
                 loss = torch.mean(scores)
 
                 # Save triple of (idx, label, score) in a list
