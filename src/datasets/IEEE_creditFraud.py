@@ -10,15 +10,16 @@ from torch.utils.data import Subset
 
 # Need to complete preprocessing here
 
-def process_identity_table(table):
-    # table = table[0:39]
-    # table = np.asarray(table)
-    print(table)
 
-def process_transaction_table(table):
-    # table = table[0:39]
-    # table = np.asarray(table)
-    print(table)
+
+def process_features(features):
+    features = np.asarray(features)
+    for i, item in enumerate(features):
+        if type(item) == 'numpy.str_':
+            np.delete(features, i, axis=1)
+
+    print(features)
+    return features
 
 def read_nth(reader, row):
     for i, x in enumerate(reader):
@@ -54,32 +55,27 @@ class MyIEEE_CreditFraud(Dataset):
 
     def __init__(self, root, train, transform):
 
-
         # Path to the csv file
-        path_2_test_identity = "/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/Datasets/IEEE_CreditFraud/test_identity.csv"
-        path_2_test_transaction = "/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/Datasets/IEEE_CreditFraud/test_transaction.csv"
         path_2_train_identity = "/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/Datasets/IEEE_CreditFraud/train_identity.csv"
         path_2_train_transaction = "/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/Datasets/IEEE_CreditFraud/train_transaction.csv"
 
         # Open and read the csv
         # tables = []
-        csv_files = [path_2_test_identity, path_2_test_transaction, path_2_train_identity, path_2_train_transaction]
-
+        csv_files = [path_2_train_identity, path_2_train_transaction]
+        labels = []
 
         
         with open(csv_files[1], mode='r') as infile:
             reader = csv.reader(infile)
-            self.test_labels = []
             for i,row in enumerate(reader):
-                # print(row)
-                self.test_labels.append(row[1])
-
-        with open(csv_files[3], mode='r') as infile:
-            reader = csv.reader(infile)
-            self.train_labels = []
-            for i,row in enumerate(reader):
-                # print(row)
-                self.train_labels.append(row[1])
+                try:
+                    labels.append(float(row[1]))
+                except:
+                    continue
+        
+        labels = labels[0:590000]
+        self.train_labels = labels[0:500000]
+        self.test_labels = labels[500000:590000]
 
         self.test_labels, self.train_labels = torch.FloatTensor(np.asarray(self.test_labels)), torch.FloatTensor(np.asarray(self.train_labels))
         self.csv_files = csv_files
@@ -91,8 +87,24 @@ class MyIEEE_CreditFraud(Dataset):
 
     def __getitem__(self, index):
 
-        #TODO: preprocesing
+
         if self.train:
+            reader, transaction_features, identity_features = None, None
+
+            with open(self.csv_file[0], mode='r') as infile:
+                reader = csv.reader(infile)
+            
+            transaction_features = read_nth(reader, index)
+
+            with open(self.csv_file[1], mode='r') as infile:
+                reader = csv.reader(infile)
+
+            identity_features = read_nth(reader, index)
+            features, target = transaction_features+identity_features, transaction_features[1]
+            del features[1]
+
+        else:
+            index = index+500000
             reader, transaction_features, identity_features = None, None
 
             with open(self.csv_file[2], mode='r') as infile:
@@ -106,20 +118,9 @@ class MyIEEE_CreditFraud(Dataset):
             identity_features = read_nth(reader, index)
             features, target = transaction_features+identity_features, transaction_features[1]
             del features[1]
-        else:
-            reader, transaction_features, identity_features = None, None
-
-            with open(self.csv_file[0], mode='r') as infile:
-                reader = csv.reader(infile)
-            transaction_features = read_nth(reader, index)
-
-            with open(self.csv_file[1], mode='r') as infile:
-                reader = csv.reader(infile)
-
-            identity_features = read_nth(reader, index)
-            features, target = transaction_features+identity_features, transaction_features[1]
-            del features[1]
-
+            del features[0]
+            features = process_features(features)
+            print(features)
 
         if self.transform:
             return self.transform(features), self.transform(target), index
@@ -129,5 +130,5 @@ class MyIEEE_CreditFraud(Dataset):
     def __len__(self):
 
         if self.train:
-            return len(self.train_data)
-        return len(self.test_data)
+            return 500000
+        return 90000
