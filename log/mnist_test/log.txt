@@ -37287,3 +37287,83 @@
 2020-10-07 16:29:29,501 - root - INFO - Nu-paramerter: 0.10
 2020-10-07 16:29:29,524 - root - INFO - Computation device: cuda
 2020-10-07 16:29:29,524 - root - INFO - Number of dataloader workers: 0
+2020-10-11 15:45:56,230 - root - INFO - Log file is ../log/mnist_test/log.txt.
+2020-10-11 15:45:56,240 - root - INFO - Data path is ../data.
+2020-10-11 15:45:56,240 - root - INFO - Export path is ../log/mnist_test.
+2020-10-11 15:45:56,240 - root - INFO - Dataset: IEEE_creditFraud
+2020-10-11 15:45:56,240 - root - INFO - Normal class: 0
+2020-10-11 15:45:56,240 - root - INFO - Network: credit_fraud_net
+2020-10-11 15:45:56,241 - root - INFO - Deep SVDD objective: one-class
+2020-10-11 15:45:56,241 - root - INFO - Nu-paramerter: 0.10
+2020-10-11 15:45:56,305 - root - INFO - Computation device: cuda
+2020-10-11 15:45:56,305 - root - INFO - Number of dataloader workers: 0
+2020-10-11 15:46:14,440 - root - INFO - Log file is ../log/mnist_test/log.txt.
+2020-10-11 15:46:14,440 - root - INFO - Data path is ../data.
+2020-10-11 15:46:14,441 - root - INFO - Export path is ../log/mnist_test.
+2020-10-11 15:46:14,441 - root - INFO - Dataset: IEEE_creditFraud
+2020-10-11 15:46:14,441 - root - INFO - Normal class: 0
+2020-10-11 15:46:14,441 - root - INFO - Network: credit_fraud_net
+2020-10-11 15:46:14,441 - root - INFO - Deep SVDD objective: one-class
+2020-10-11 15:46:14,441 - root - INFO - Nu-paramerter: 0.10
+2020-10-11 15:46:14,466 - root - INFO - Computation device: cuda
+2020-10-11 15:46:14,467 - root - INFO - Number of dataloader workers: 0
+2020-10-11 15:50:06,957 - root - INFO - Log file is ../log/mnist_test/log.txt.
+2020-10-11 15:50:06,957 - root - INFO - Data path is ../data.
+2020-10-11 15:50:06,957 - root - INFO - Export path is ../log/mnist_test.
+2020-10-11 15:50:06,958 - root - INFO - Dataset: IEEE_creditFraud
+2020-10-11 15:50:06,958 - root - INFO - Normal class: 0
+2020-10-11 15:50:06,958 - root - INFO - Network: credit_fraud_net
+2020-10-11 15:50:06,958 - root - INFO - Deep SVDD objective: one-class
+2020-10-11 15:50:06,958 - root - INFO - Nu-paramerter: 0.10
+2020-10-11 15:50:06,982 - root - INFO - Computation device: cuda
+2020-10-11 15:50:06,982 - root - INFO - Number of dataloader workers: 0
+2020-10-11 16:46:02,892 - root - INFO - Log file is ../log/mnist_test/log.txt.
+2020-10-11 16:46:02,892 - root - INFO - Data path is ../data.
+2020-10-11 16:46:02,892 - root - INFO - Export path is ../log/mnist_test.
+2020-10-11 16:46:02,892 - root - INFO - Dataset: IEEE_creditFraud
+2020-10-11 16:46:02,892 - root - INFO - Normal class: 0
+2020-10-11 16:46:02,892 - root - INFO - Network: credit_fraud_net
+2020-10-11 16:46:02,892 - root - INFO - Deep SVDD objective: one-class
+2020-10-11 16:46:02,892 - root - INFO - Nu-paramerter: 0.10
+2020-10-11 16:46:02,916 - root - INFO - Computation device: cuda
+2020-10-11 16:46:02,916 - root - INFO - Number of dataloader workers: 0
+2020-10-11 17:22:18,714 - root - INFO - Log file is ../log/mnist_test/log.txt.
+2020-10-11 17:22:18,715 - root - INFO - Data path is ../data.
+2020-10-11 17:22:18,715 - root - INFO - Export path is ../log/mnist_test.
+2020-10-11 17:22:18,715 - root - INFO - Dataset: IEEE_creditFraud
+2020-10-11 17:22:18,715 - root - INFO - Normal class: 0
+2020-10-11 17:22:18,715 - root - INFO - Network: credit_fraud_net
+2020-10-11 17:22:18,715 - root - INFO - Deep SVDD objective: one-class
+2020-10-11 17:22:18,715 - root - INFO - Nu-paramerter: 0.10
+2020-10-11 17:22:18,740 - root - INFO - Computation device: cuda
+2020-10-11 17:22:18,740 - root - INFO - Number of dataloader workers: 0
+2020-10-11 17:27:53,332 - root - INFO - Log file is ../log/mnist_test/log.txt.
+2020-10-11 17:27:53,332 - root - INFO - Data path is ../data.
+2020-10-11 17:27:53,332 - root - INFO - Export path is ../log/mnist_test.
+2020-10-11 17:27:53,332 - root - INFO - Dataset: IEEE_creditFraud
+2020-10-11 17:27:53,332 - root - INFO - Normal class: 0
+2020-10-11 17:27:53,332 - root - INFO - Network: credit_fraud_net
+2020-10-11 17:27:53,332 - root - INFO - Deep SVDD objective: one-class
+2020-10-11 17:27:53,332 - root - INFO - Nu-paramerter: 0.10
+2020-10-11 17:27:53,388 - root - INFO - Computation device: cuda
+2020-10-11 17:27:53,388 - root - INFO - Number of dataloader workers: 0
+2020-10-11 17:29:01,546 - root - INFO - Log file is ../log/mnist_test/log.txt.
+2020-10-11 17:29:01,546 - root - INFO - Data path is ../data.
+2020-10-11 17:29:01,546 - root - INFO - Export path is ../log/mnist_test.
+2020-10-11 17:29:01,546 - root - INFO - Dataset: IEEE_creditFraud
+2020-10-11 17:29:01,546 - root - INFO - Normal class: 0
+2020-10-11 17:29:01,546 - root - INFO - Network: credit_fraud_net
+2020-10-11 17:29:01,546 - root - INFO - Deep SVDD objective: one-class
+2020-10-11 17:29:01,546 - root - INFO - Nu-paramerter: 0.10
+2020-10-11 17:29:01,573 - root - INFO - Computation device: cuda
+2020-10-11 17:29:01,573 - root - INFO - Number of dataloader workers: 0
+2020-10-11 17:37:22,750 - root - INFO - Log file is ../log/mnist_test/log.txt.
+2020-10-11 17:37:22,750 - root - INFO - Data path is ../data.
+2020-10-11 17:37:22,750 - root - INFO - Export path is ../log/mnist_test.
+2020-10-11 17:37:22,750 - root - INFO - Dataset: IEEE_creditFraud
+2020-10-11 17:37:22,750 - root - INFO - Normal class: 0
+2020-10-11 17:37:22,750 - root - INFO - Network: credit_fraud_net
+2020-10-11 17:37:22,750 - root - INFO - Deep SVDD objective: one-class
+2020-10-11 17:37:22,750 - root - INFO - Nu-paramerter: 0.10
+2020-10-11 17:37:22,773 - root - INFO - Computation device: cuda
+2020-10-11 17:37:22,773 - root - INFO - Number of dataloader workers: 0

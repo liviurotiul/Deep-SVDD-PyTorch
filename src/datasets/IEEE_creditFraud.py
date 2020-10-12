@@ -9,22 +9,21 @@ from torch.utils.data import Subset
 
 
 # Need to complete preprocessing here
-def process_tables(tables):
-    identity_tables = [tables[0], tables[2]]
-    transcation_tables =  [tables[1], tables[3]]
-    identity_tables = [process_identity_table(x) for x in identity_tables]
-    transcation_tables = []
-    return 
 
 def process_identity_table(table):
-    table = table[0:39]
-    table = np.asarray(table)
+    # table = table[0:39]
+    # table = np.asarray(table)
     print(table)
 
 def process_transaction_table(table):
-    table = table[0:39]
-    table = np.asarray(table)
+    # table = table[0:39]
+    # table = np.asarray(table)
     print(table)
+
+def read_nth(reader, row):
+    for i, x in enumerate(reader):
+        if i == row:
+            return list(row)
 
 class IEEE_CreditFraud_Dataset(TorchvisionDataset):
 
@@ -63,36 +62,63 @@ class MyIEEE_CreditFraud(Dataset):
         path_2_train_transaction = "/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/Datasets/IEEE_CreditFraud/train_transaction.csv"
 
         # Open and read the csv
-        tables = []
+        # tables = []
         csv_files = [path_2_test_identity, path_2_test_transaction, path_2_train_identity, path_2_train_transaction]
-        for csv_file in csv_files:
-            with open(csv_file, mode='r') as infile:
-                reader = csv.reader(infile)
-                table = []
-                for i,row in enumerate(reader):
-                    # print(row)
-                    table.append(list(row))
-                    if i == 100000:
-                        break
-            tables.append(table)
 
+
+        
+        with open(csv_files[1], mode='r') as infile:
+            reader = csv.reader(infile)
+            self.test_labels = []
+            for i,row in enumerate(reader):
+                # print(row)
+                self.test_labels.append(row[1])
+
+        with open(csv_files[3], mode='r') as infile:
+            reader = csv.reader(infile)
+            self.train_labels = []
+            for i,row in enumerate(reader):
+                # print(row)
+                self.train_labels.append(row[1])
+
+        self.test_labels, self.train_labels = torch.FloatTensor(np.asarray(self.test_labels)), torch.FloatTensor(np.asarray(self.train_labels))
         self.csv_files = csv_files
         # print(tables)
 
-        self.train_data = None
-        self.test_data = None
-        self.train_labels = None
-        self.test_labels = None
-        
+
+
         self.transform = transform
 
     def __getitem__(self, index):
 
-
+        #TODO: preprocesing
         if self.train:
-            features, target = self.train_data[index], self.train_labels[index]
+            reader, transaction_features, identity_features = None, None
+
+            with open(self.csv_file[2], mode='r') as infile:
+                reader = csv.reader(infile)
+            
+            transaction_features = read_nth(reader, index)
+
+            with open(self.csv_file[3], mode='r') as infile:
+                reader = csv.reader(infile)
+
+            identity_features = read_nth(reader, index)
+            features, target = transaction_features+identity_features, transaction_features[1]
+            del features[1]
         else:
-            features, target = self.test_data[index], self.test_labels[index]
+            reader, transaction_features, identity_features = None, None
+
+            with open(self.csv_file[0], mode='r') as infile:
+                reader = csv.reader(infile)
+            transaction_features = read_nth(reader, index)
+
+            with open(self.csv_file[1], mode='r') as infile:
+                reader = csv.reader(infile)
+
+            identity_features = read_nth(reader, index)
+            features, target = transaction_features+identity_features, transaction_features[1]
+            del features[1]
 
 
         if self.transform:
