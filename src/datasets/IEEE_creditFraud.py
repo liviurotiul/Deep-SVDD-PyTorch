@@ -80,7 +80,7 @@ class MyIEEE_CreditFraud(Dataset):
         self.test_labels, self.train_labels = torch.FloatTensor(np.asarray(self.test_labels)), torch.FloatTensor(np.asarray(self.train_labels))
         self.csv_files = csv_files
         # print(tables)
-
+        self.train = train
 
 
         self.transform = transform
@@ -89,14 +89,14 @@ class MyIEEE_CreditFraud(Dataset):
 
 
         if self.train:
-            reader, transaction_features, identity_features = None, None
+            reader, transaction_features, identity_features = None, None, None
 
-            with open(self.csv_file[0], mode='r') as infile:
+            with open(self.csv_files[0], mode='r') as infile:
                 reader = csv.reader(infile)
             
             transaction_features = read_nth(reader, index)
 
-            with open(self.csv_file[1], mode='r') as infile:
+            with open(self.csv_files[1], mode='r') as infile:
                 reader = csv.reader(infile)
 
             identity_features = read_nth(reader, index)
@@ -107,12 +107,12 @@ class MyIEEE_CreditFraud(Dataset):
             index = index+500000
             reader, transaction_features, identity_features = None, None
 
-            with open(self.csv_file[2], mode='r') as infile:
+            with open(self.csv_files[2], mode='r') as infile:
                 reader = csv.reader(infile)
             
             transaction_features = read_nth(reader, index)
 
-            with open(self.csv_file[3], mode='r') as infile:
+            with open(self.csv_files[3], mode='r') as infile:
                 reader = csv.reader(infile)
 
             identity_features = read_nth(reader, index)
