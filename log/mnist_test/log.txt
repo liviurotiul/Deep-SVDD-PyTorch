@@ -37587,3 +37587,39 @@
 2020-10-16 18:46:35,374 - root - INFO - Pretraining batch size: 128
 2020-10-16 18:46:35,375 - root - INFO - Pretraining weight decay: 1e-06
 2020-10-16 18:46:37,968 - root - INFO - Starting pretraining...
+2020-10-16 18:53:30,818 - root - INFO - Log file is ../log/mnist_test/log.txt.
+2020-10-16 18:53:30,819 - root - INFO - Data path is ../data.
+2020-10-16 18:53:30,819 - root - INFO - Export path is ../log/mnist_test.
+2020-10-16 18:53:30,819 - root - INFO - Dataset: IEEE_creditFraud
+2020-10-16 18:53:30,819 - root - INFO - Normal class: 0
+2020-10-16 18:53:30,819 - root - INFO - Network: credit_fraud_net
+2020-10-16 18:53:30,819 - root - INFO - Deep SVDD objective: one-class
+2020-10-16 18:53:30,819 - root - INFO - Nu-paramerter: 0.10
+2020-10-16 18:53:30,839 - root - INFO - Computation device: cuda
+2020-10-16 18:53:30,839 - root - INFO - Number of dataloader workers: 0
+2020-10-16 18:53:46,541 - root - INFO - Pretraining: True
+2020-10-16 18:53:46,541 - root - INFO - Pretraining optimizer: adam
+2020-10-16 18:53:46,541 - root - INFO - Pretraining learning rate: 0.001
+2020-10-16 18:53:46,541 - root - INFO - Pretraining epochs: 20
+2020-10-16 18:53:46,541 - root - INFO - Pretraining learning rate scheduler milestones: (5,)
+2020-10-16 18:53:46,541 - root - INFO - Pretraining batch size: 128
+2020-10-16 18:53:46,541 - root - INFO - Pretraining weight decay: 1e-06
+2020-10-16 18:53:48,999 - root - INFO - Starting pretraining...
+2020-10-16 18:55:39,046 - root - INFO - Log file is ../log/mnist_test/log.txt.
+2020-10-16 18:55:39,046 - root - INFO - Data path is ../data.
+2020-10-16 18:55:39,046 - root - INFO - Export path is ../log/mnist_test.
+2020-10-16 18:55:39,046 - root - INFO - Dataset: IEEE_creditFraud
+2020-10-16 18:55:39,046 - root - INFO - Normal class: 0
+2020-10-16 18:55:39,046 - root - INFO - Network: credit_fraud_net
+2020-10-16 18:55:39,046 - root - INFO - Deep SVDD objective: one-class
+2020-10-16 18:55:39,046 - root - INFO - Nu-paramerter: 0.10
+2020-10-16 18:55:39,066 - root - INFO - Computation device: cuda
+2020-10-16 18:55:39,066 - root - INFO - Number of dataloader workers: 0
+2020-10-16 18:55:56,144 - root - INFO - Pretraining: True
+2020-10-16 18:55:56,144 - root - INFO - Pretraining optimizer: adam
+2020-10-16 18:55:56,144 - root - INFO - Pretraining learning rate: 0.001
+2020-10-16 18:55:56,144 - root - INFO - Pretraining epochs: 20
+2020-10-16 18:55:56,144 - root - INFO - Pretraining learning rate scheduler milestones: (5,)
+2020-10-16 18:55:56,144 - root - INFO - Pretraining batch size: 128
+2020-10-16 18:55:56,144 - root - INFO - Pretraining weight decay: 1e-06
+2020-10-16 18:55:58,632 - root - INFO - Starting pretraining...

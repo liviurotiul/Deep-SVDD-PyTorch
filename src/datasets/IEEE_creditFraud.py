@@ -89,19 +89,18 @@ class MyIEEE_CreditFraud(Dataset):
 
 
         if self.train:
-            reader, transaction_features, identity_features = None, None, None
+            target, features, reader, transaction_features, identity_features = None, None, None, None, None
 
             with open(self.csv_files[0], mode='r') as infile:
                 reader = csv.reader(infile)
-            
-            transaction_features = read_nth(reader, index)
+                transaction_features = read_nth(reader, index)
 
             with open(self.csv_files[1], mode='r') as infile:
                 reader = csv.reader(infile)
 
-            identity_features = read_nth(reader, index)
-            features, target = transaction_features+identity_features, transaction_features[1]
-            del features[1]
+                identity_features = read_nth(reader, index)
+                features, target = transaction_features+identity_features, transaction_features[1]
+                del features[1]
 
         else:
             index = index+500000
@@ -109,18 +108,16 @@ class MyIEEE_CreditFraud(Dataset):
 
             with open(self.csv_files[2], mode='r') as infile:
                 reader = csv.reader(infile)
-            
-            transaction_features = read_nth(reader, index)
+                transaction_features = read_nth(reader, index)
 
             with open(self.csv_files[3], mode='r') as infile:
                 reader = csv.reader(infile)
-
-            identity_features = read_nth(reader, index)
-            features, target = transaction_features+identity_features, transaction_features[1]
-            del features[1]
-            del features[0]
-            features = process_features(features)
-            print(features)
+                identity_features = read_nth(reader, index)
+                features, target = transaction_features+identity_features, transaction_features[1]
+                del features[1]
+                del features[0]
+                features = process_features(features)
+                print(features)
 
         if self.transform:
             return self.transform(features), self.transform(target), index
