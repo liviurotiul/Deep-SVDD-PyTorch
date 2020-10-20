@@ -7,7 +7,6 @@ from .preprocessing import get_target_label_idx
 import torch
 from torch.utils.data import Subset
 
-
 # Need to complete preprocessing here
 
 
@@ -18,13 +17,15 @@ def process_features(features):
         if type(item) == 'numpy.str_':
             np.delete(features, i, axis=1)
 
-    print(features)
     return features
 
 def read_nth(reader, row):
+
+    lent = 0
     for i, x in enumerate(reader):
         if i == row:
-            return list(row)
+            return list(x)
+        lent = i
 
 class IEEE_CreditFraud_Dataset(TorchvisionDataset):
 
@@ -74,51 +75,45 @@ class MyIEEE_CreditFraud(Dataset):
                     continue
         
         labels = labels[0:590000]
-        self.train_labels = labels[0:500000]
-        self.test_labels = labels[500000:590000]
+        self.train_labels = labels[0:5000]
+        self.test_labels = labels[5000:5900]
 
         self.test_labels, self.train_labels = torch.FloatTensor(np.asarray(self.test_labels)), torch.FloatTensor(np.asarray(self.train_labels))
         self.csv_files = csv_files
-        # print(tables)
+
         self.train = train
 
 
         self.transform = transform
 
     def __getitem__(self, index):
-
+        print("index")
 
         if self.train:
             target, features, reader, transaction_features, identity_features = None, None, None, None, None
 
-            with open(self.csv_files[0], mode='r') as infile:
+            with open(self.csv_files[1], mode='r') as infile:
                 reader = csv.reader(infile)
                 transaction_features = read_nth(reader, index)
+
+
+            features, target = transaction_features, transaction_features[1]
+            del features[1]
+
+        else:
+            index = index+5000
+            reader, transaction_features, identity_features = None, None, None
 
             with open(self.csv_files[1], mode='r') as infile:
                 reader = csv.reader(infile)
-
-                identity_features = read_nth(reader, index)
-                features, target = transaction_features+identity_features, transaction_features[1]
-                del features[1]
-
-        else:
-            index = index+500000
-            reader, transaction_features, identity_features = None, None
-
-            with open(self.csv_files[2], mode='r') as infile:
-                reader = csv.reader(infile)
                 transaction_features = read_nth(reader, index)
 
-            with open(self.csv_files[3], mode='r') as infile:
-                reader = csv.reader(infile)
-                identity_features = read_nth(reader, index)
-                features, target = transaction_features+identity_features, transaction_features[1]
-                del features[1]
-                del features[0]
-                features = process_features(features)
-                print(features)
 
+            features, target = transaction_features, transaction_features[1]
+            del features[1]
+            del features[0]
+            # features = process_features(features)
+        print(features)
         if self.transform:
             return self.transform(features), self.transform(target), index
         else:
@@ -127,5 +122,5 @@ class MyIEEE_CreditFraud(Dataset):
     def __len__(self):
 
         if self.train:
-            return 500000
-        return 90000
+            return 5000
+        return 900
