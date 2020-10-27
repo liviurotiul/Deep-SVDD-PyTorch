@@ -38889,3 +38889,58 @@
 2020-10-21 14:21:18,624 - root - INFO - Testing time: 0.767
 2020-10-21 14:21:18,685 - root - INFO - Test set AUC: 85.11%
 2020-10-21 15:09:58,131 - root - INFO - Finished testing.
+2020-10-27 17:15:53,498 - root - INFO - Log file is ../log/mnist_test/log.txt.
+2020-10-27 17:15:53,536 - root - INFO - Data path is ../data.
+2020-10-27 17:15:53,536 - root - INFO - Export path is ../log/mnist_test.
+2020-10-27 17:15:53,536 - root - INFO - Dataset: malware_detection
+2020-10-27 17:15:53,537 - root - INFO - Normal class: 0
+2020-10-27 17:15:53,537 - root - INFO - Network: malware_detection_net
+2020-10-27 17:15:53,537 - root - INFO - Deep SVDD objective: one-class
+2020-10-27 17:15:53,537 - root - INFO - Nu-paramerter: 0.10
+2020-10-27 17:15:53,887 - root - INFO - Computation device: cuda
+2020-10-27 17:15:53,888 - root - INFO - Number of dataloader workers: 0
+2020-10-27 17:16:00,123 - root - INFO - Pretraining: True
+2020-10-27 17:16:00,123 - root - INFO - Pretraining optimizer: adam
+2020-10-27 17:16:00,123 - root - INFO - Pretraining learning rate: 0.001
+2020-10-27 17:16:00,123 - root - INFO - Pretraining epochs: 20
+2020-10-27 17:16:00,123 - root - INFO - Pretraining learning rate scheduler milestones: (5,)
+2020-10-27 17:16:00,123 - root - INFO - Pretraining batch size: 128
+2020-10-27 17:16:00,123 - root - INFO - Pretraining weight decay: 1e-06
+2020-10-27 17:16:02,041 - root - INFO - Starting pretraining...
+2020-10-27 17:16:03,599 - root - INFO -   Epoch 1/20	 Time: 1.557	 Loss: 4.33443961
+2020-10-27 17:16:04,539 - root - INFO -   Epoch 2/20	 Time: 0.940	 Loss: 3.51012419
+2020-10-27 17:16:05,474 - root - INFO -   Epoch 3/20	 Time: 0.934	 Loss: 3.46522707
+2020-10-27 17:16:06,406 - root - INFO -   Epoch 4/20	 Time: 0.933	 Loss: 3.44473706
+2020-10-27 17:16:07,349 - root - INFO -   Epoch 5/20	 Time: 0.943	 Loss: 3.43865099
+2020-10-27 17:16:07,350 - root - INFO -   LR scheduler: new learning rate is 0.0001
+2020-10-27 17:16:08,281 - root - INFO -   Epoch 6/20	 Time: 0.931	 Loss: 3.43787130
+2020-10-27 17:16:09,215 - root - INFO -   Epoch 7/20	 Time: 0.934	 Loss: 3.43649091
+2020-10-27 17:16:10,147 - root - INFO -   Epoch 8/20	 Time: 0.931	 Loss: 3.43565903
+2020-10-27 17:16:11,083 - root - INFO -   Epoch 9/20	 Time: 0.936	 Loss: 3.43463154
+2020-10-27 17:16:12,019 - root - INFO -   Epoch 10/20	 Time: 0.936	 Loss: 3.43343523
+2020-10-27 17:16:12,955 - root - INFO -   Epoch 11/20	 Time: 0.936	 Loss: 3.43198746
+2020-10-27 17:16:13,892 - root - INFO -   Epoch 12/20	 Time: 0.936	 Loss: 3.43117660
+2020-10-27 17:16:14,824 - root - INFO -   Epoch 13/20	 Time: 0.932	 Loss: 3.43035119
+2020-10-27 17:16:15,756 - root - INFO -   Epoch 14/20	 Time: 0.932	 Loss: 3.42980827
+2020-10-27 17:16:16,696 - root - INFO -   Epoch 15/20	 Time: 0.940	 Loss: 3.42954968
+2020-10-27 17:16:17,635 - root - INFO -   Epoch 16/20	 Time: 0.938	 Loss: 3.42910879
+2020-10-27 17:16:18,574 - root - INFO -   Epoch 17/20	 Time: 0.939	 Loss: 3.42887644
+2020-10-27 17:16:19,515 - root - INFO -   Epoch 18/20	 Time: 0.940	 Loss: 3.42854421
+2020-10-27 17:16:20,453 - root - INFO -   Epoch 19/20	 Time: 0.938	 Loss: 3.42784639
+2020-10-27 17:16:21,390 - root - INFO -   Epoch 20/20	 Time: 0.937	 Loss: 3.42850567
+2020-10-27 17:16:21,390 - root - INFO - Pretraining time: 19.349
+2020-10-27 17:16:21,390 - root - INFO - Finished pretraining.
+2020-10-27 17:16:21,390 - root - INFO - Testing autoencoder...
+2020-10-27 17:16:21,649 - root - INFO - Test set Loss: 3.86867643
+2020-10-27 17:16:21,735 - root - INFO - Test set AUC: 99.84%
+2020-10-27 17:16:21,735 - root - INFO - Autoencoder testing time: 0.345
+2020-10-27 17:16:21,735 - root - INFO - Finished testing autoencoder.
+2020-10-27 17:16:21,738 - root - INFO - Training optimizer: adam
+2020-10-27 17:16:21,738 - root - INFO - Training learning rate: 3e-05
+2020-10-27 17:16:21,738 - root - INFO - Training epochs: 27
+2020-10-27 17:16:21,738 - root - INFO - Training learning rate scheduler milestones: (10,)
+2020-10-27 17:16:21,738 - root - INFO - Training batch size: 10
+2020-10-27 17:16:21,738 - root - INFO - Training weight decay: 5e-06
+2020-10-27 17:16:21,739 - root - INFO - Initializing center c...
+2020-10-27 17:16:23,566 - root - INFO - Center c initialized.
+2020-10-27 17:16:23,567 - root - INFO - Starting training...
