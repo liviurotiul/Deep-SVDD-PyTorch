@@ -154,6 +154,7 @@ class DeepSVDDTrainer(BaseTrainer):
         _, labels, scores = zip(*idx_label_score)
         labels = np.array(labels)
         scores = np.array(scores)
+        
 
         self.test_auc = roc_auc_score(labels, scores)
 
@@ -182,7 +183,6 @@ class DeepSVDDTrainer(BaseTrainer):
         print("false_positive: ", false_positive)
         print("false_negative: ", false_negative)
         print("accuracy: ", ((true_positive+true_negative)/len(labels)) )
-        print('Test set AUC: {:.2f}%'.format(100. * self.test_auc))
         logger.info('Test set AUC: {:.2f}%'.format(100. * self.test_auc))
 
 
@@ -198,7 +198,20 @@ class DeepSVDDTrainer(BaseTrainer):
         plt.xlabel('False Positive Rate')
         plt.show()
 
+        nonzero_indeces = np.nonzero(labels)[0]
+        zero_indeces = np.where(labels == 0)[0]
 
+        outliars = scores[nonzero_indeces]
+        normal_samples = scores[zero_indeces]
+
+        plt.hist(scores, color='green', density=False)
+        # plt.show()
+        plt.hist(outliars, color='blue', density=False)
+        # plt.yscale('log')
+        # plt.plot(scores, scores)
+        # plt.plot(outliars, outliars, color="red")
+        plt.show()
+        import pdb; pdb.set_trace()
         logger.info('Finished testing.')
 
     def init_center_c(self, train_loader: DataLoader, net: BaseNet, eps=0.1):

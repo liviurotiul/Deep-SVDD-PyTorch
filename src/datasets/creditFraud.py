@@ -56,15 +56,15 @@ class MyCreditFraud(Dataset):
         features[:,0] = features[:,0]/np.max(features[:,0])
         # print(features[])
 
-        # self.train_data = torch.from_numpy(features[0:200000])
-        # self.test_data = torch.from_numpy(features[200001:284807])
-        # self.train_labels = torch.from_numpy(labels[0:200000])
-        # self.test_labels = torch.from_numpy(labels[200001:284807])
-
         self.train_data = torch.from_numpy(features[0:200000])
-        self.test_data = torch.from_numpy(features[0:200000])
+        self.test_data = torch.from_numpy(features[200000:284807])
         self.train_labels = torch.from_numpy(labels[0:200000])
-        self.test_labels = torch.from_numpy(labels[0:200000])
+        self.test_labels = torch.from_numpy(labels[200000:284807])
+
+        # self.train_data = torch.from_numpy(features[0:200000])
+        # self.test_data = torch.from_numpy(features[0:200000])
+        # self.train_labels = torch.from_numpy(labels[0:200000])
+        # self.test_labels = torch.from_numpy(labels[0:200000])
 
         self.train = train
         self.transform = transform
