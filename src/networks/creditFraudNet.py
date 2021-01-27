@@ -17,7 +17,7 @@ from base.base_net import BaseNet
 #         self.bn2 = nn.BatchNorm1d(21, eps=1e-04, affine=False)
 
 #         self.fc4 = nn.Linear(21, 6, bias=False)
-        
+
 #     def forward(self, x):
 #         x = x.float()
 #         x.unsqueeze(-1)
@@ -42,7 +42,7 @@ from base.base_net import BaseNet
 #         self.bn2 = nn.BatchNorm1d(21, eps=1e-04, affine=False)
 
 #         self.fc4 = nn.Linear(21, 6, bias=False)
-        
+
 
 #         #decoder
 #         self.fc1_b = nn.Linear(21, 30, bias=False)
@@ -87,9 +87,10 @@ from base.base_net import BaseNet
 
 
 class CreditFraudNet(BaseNet):
-#net3
+
     def __init__(self):
         super().__init__()
+
         self.hidden_dim = 24
         self.rep_dim = 6
 
@@ -97,11 +98,11 @@ class CreditFraudNet(BaseNet):
         self.bn1 = nn.BatchNorm1d(self.hidden_dim, eps=1e-04, affine=False)
         self.fc2 = nn.Linear(self.hidden_dim, 6, bias=False)
 
-        
+
     def forward(self, x):
+
         x = x.float()
         x.unsqueeze(-1)
-
         x = self.bn1(F.leaky_relu(self.fc1(x)))
         x = self.fc2(x)
 
@@ -118,7 +119,7 @@ class CreditFraudNet_Autoencoder(BaseNet):
         self.fc1 = nn.Linear(30, self.hidden_dim, bias=False)
         self.bn1 = nn.BatchNorm1d(self.hidden_dim, eps=1e-04, affine=False)
         self.fc2 = nn.Linear(self.hidden_dim, 6, bias=False)
-        
+
 
         #decoder
         self.fc3_b = nn.Linear(self.hidden_dim, 30, bias=False)

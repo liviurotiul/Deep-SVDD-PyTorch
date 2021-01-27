@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import IsolationForest
 from sklearn.neighbors import LocalOutlierFactor
+import torch
 path_2_csv = "/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/Datasets/CreditFraud/creditcard.csv"
 
 def mod(x):
@@ -57,8 +58,8 @@ OCSVM = OneClassSVM(gamma='auto', nu=0.02).fit(train_data)
 isolation_forest = IsolationForest(random_state=0).fit(train_data)
 local_outliar = LocalOutlierFactor(n_neighbors=20, novelty=True).fit(train_data)
 
-models = [local_outliar]
-names = ["local_outliar"]
+models = [OCSVM, isolation_forest, local_outliar]
+names = ["ocsvm", "isolation_forest" "local_outliar"]
 for model, name in zip(models, names):
 
     print("===================================================================================")
@@ -66,8 +67,8 @@ for model, name in zip(models, names):
     predicted = model.predict(test_data)
     scores = 1-model.score_samples(test_data)
     predicted = [mod(x) for x in predicted]
-    print(predicted[0:10])
-    print(scores[0:10])
+    # print(predicted[0:10])
+    # print(scores[0:10])
 
     true_positive = 0
     true_negative = 0
@@ -102,12 +103,32 @@ for model, name in zip(models, names):
     # roc_auc = auc(fpr, tpr)
     # print(roc_auc)
 
-    plt.title('Receiver Operating Characteristic')
-    plt.plot(fpr, tpr, 'b', label = 'AUC = %0.2f' % roc_auc)
-    plt.legend(loc = 'lower right')
-    plt.plot([0, 1], [0, 1],'r--')
-    plt.xlim([0, 1])
-    plt.ylim([0, 1])
-    plt.ylabel('True Positive Rate')
-    plt.xlabel('False Positive Rate')
-    plt.show()
+    # plt.title('Receiver Operating Characteristic')
+    # plt.plot(fpr, tpr, 'b', label = 'AUC = %0.2f' % roc_auc)
+    # plt.legend(loc = 'lower right')
+    # plt.plot([0, 1], [0, 1],'r--')
+    # plt.xlim([0, 1])
+    # plt.ylim([0, 1])
+    # plt.ylabel('True Positive Rate')
+    # plt.xlabel('False Positive Rate')
+    # plt.show()
+    
+
+    nonzero_indeces = np.nonzero(test_labels)[0]
+    zero_indeces = np.where(test_labels == 0)[0]
+
+    outliars = scores[nonzero_indeces]
+    normal_samples = scores[zero_indeces]
+    # plt.figure(figsize=(15, 10))
+    # sns.displot(scores, kind="kde")
+    # sns.displot(outliars, kind="kde")
+    # plt.hist(scores, color='green')
+    # plt.figure(figsize=(20, 20))
+    # scores
+    # # plt.hist(outliars, color='blue')
+
+    # plt.show()
+    np.save("/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/results/credit_fraud/"+name+"_fpr", fpr)
+    np.save("/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/results/credit_fraud/"+name+"_tpr", tpr)
+    np.save("/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/results/credit_fraud/"+name+"_scores", scores)
+    np.save("/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/results/credit_fraud/"+name+"_outliars", outliars)

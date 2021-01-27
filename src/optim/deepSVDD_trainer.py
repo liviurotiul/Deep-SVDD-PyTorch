@@ -207,12 +207,18 @@ class DeepSVDDTrainer(BaseTrainer):
         plt.hist(scores, color='green', density=False)
         # plt.show()
         plt.hist(outliars, color='blue', density=False)
-        # plt.yscale('log')
+        plt.yscale('log')
         # plt.plot(scores, scores)
         # plt.plot(outliars, outliars, color="red")
         plt.show()
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         logger.info('Finished testing.')
+        import pdb; pdb.set_trace()
+        np.save("/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/results/credit_fraud/"+"DeepSVDD"+"_fpr", fpr)
+        np.save("/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/results/credit_fraud/"+"DeepSVDD"+"_tpr", tpr)
+        np.save("/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/results/credit_fraud/"+"DeepSVDD"+"_scores", scores)
+        np.save("/home/liviu/Documents/Dev/Deep-SVDD-PyTorch/results/credit_fraud/"+"DeepSVDD"+"_outliars", outliars)
+
 
     def init_center_c(self, train_loader: DataLoader, net: BaseNet, eps=0.1):
         """Initialize hypersphere center c as the mean from an initial forward pass on the data."""

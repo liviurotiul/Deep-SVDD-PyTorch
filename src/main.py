@@ -14,8 +14,8 @@ from datasets.main import load_dataset
 # Settings
 ################################################################################
 @click.command()
-@click.argument('dataset_name', type=click.Choice(['mnist', 'cifar10', 'creditFraud', 'IEEE_creditFraud', "malware_detection"]))
-@click.argument('net_name', type=click.Choice(['mnist_LeNet', 'cifar10_LeNet', 'cifar10_LeNet_ELU', 'credit_fraud_net', 'malware_detection_net']))
+@click.argument('dataset_name', type=click.Choice(['mnist', 'cifar10', 'creditFraud', 'IEEE_creditFraud', "malware_detection", "_2nHack"]))
+@click.argument('net_name', type=click.Choice(['mnist_LeNet', 'cifar10_LeNet', 'cifar10_LeNet_ELU', 'credit_fraud_net', 'malware_detection_net', "_2nHack_net"]))
 @click.argument('xp_path', type=click.Path(exists=True))
 @click.argument('data_path', type=click.Path(exists=True))
 @click.option('--load_config', type=click.Path(exists=True), default=None,
